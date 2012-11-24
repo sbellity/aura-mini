@@ -1,0 +1,12 @@
+{
+  "name": "aura-mini",
+  "version": "0.1.0",
+  "devDependencies": {
+    "grunt": "~0.3.17",
+    "grunt-requirejs": "~0.2.14",
+    "grunt-contrib": "~0.3.0",
+    "grunt-jasmine-task": "~0.2.2",
+    "grunt-dox": "*",
+    "grunt-growl": "*"
+  }
+}
