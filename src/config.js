@@ -2,7 +2,7 @@ define(function() {
 
   require.config({
     
-    baseUrl: "/",
+    baseUrl: "src",
 
     deps: ['aura'],
     
@@ -16,20 +16,17 @@ define(function() {
       backbone:           './vendor/backbone',
       underscore:         './vendor/underscore',
       eventemitter:       './vendor/eventemitter2',
-      widgets:            './widgets'
-    },
 
-    config: {
-      'aura/core': {
-        extensions: ['aura/core/pubsub', 'aura/core/widgets']
-      },
-      'aura/sandbox': {
-        extensions: ['mvc', 'pubsub', 'store']
-      }
+      // Require extensions
+      text:               './vendor/require/text',
+      i18n:               './vendor/require/i18n',
+
+      // Local Widgets
+      widgets:            '../../widgets'
     },
 
     packages: [
-      { name: 'aura', location: './lib/aura' }
+      { name: 'aura', location: 'aura' }
     ],
     
     shim: {

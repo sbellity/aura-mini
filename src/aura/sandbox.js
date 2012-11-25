@@ -7,8 +7,9 @@ define([
   var extensions = Array.prototype.slice.call(arguments);
   
   return {
-    create: function(core) {
-      var sandbox = {};
+    create: function(core, channel) {
+
+      var sandbox = { channel: channel };
       
       // Expose base core API
       core.util.each(['log', 'template', 'util', 'data', 'dom'], function(i,m) {
@@ -21,15 +22,12 @@ define([
 
       // Load Sandbox extensions...
       core.util.each(extensions, function(i, ext) {
-        console.warn("Sandbox ext: ", sandbox, ext);
         sandbox = ext.extend(sandbox, core);
       });
 
       sandbox.start = function(el) {
         core.start(el);
       };
-
-      console.warn("Sandbox api ", sandbox);
 
       return sandbox;
     }

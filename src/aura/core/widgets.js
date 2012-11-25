@@ -1,4 +1,4 @@
-define(['../base', '../sandbox'], function(base, sandbox) {
+define(['../base', '../sandbox', 'text', 'i18n'], function(base, sandbox, text, i18n) {
 
   var seq = 0;
 
@@ -12,49 +12,56 @@ define(['../base', '../sandbox'], function(base, sandbox) {
     var widgets = [],
         selector = "[data-widget]";
     base.dom.find(selector, el).each(function() {
-      var options = { el: this, element: this };
+      var options = { el: this, element: this, require: {} };
+
       base.util.each(base.dom.data(this), function(k,v) {
         options[decamelize(k)] = v;
       });
-      widgets.push({ channel: options.widget, options: options });
+
+      var ref     = options.widget.split("@"),
+          channel = ref[0],
+          loc;
+
+      if (ref[1]) {
+        loc = "http://" + ref[1] + "/" + channel;
+      } else {
+        loc = "./widgets/" + channel;
+      }
+
+      options.require           = options.require || {};
+      options.require.packages  = options.require.packages || [];
+      options.require.packages.push({ name: channel, location: loc });
+
+      widgets.push({ channel: channel, options: options });
     });
     return widgets;
   }
 
   function loadWidget(widget) {
-    var file          = decamelize(widget.channel),
+    var channel       = decamelize(widget.channel),
         dfd           = base.data.deferred(),
-        sandboxId     = "sandbox$" + seq++, 
-        requireConfig = { context: sandboxId, map: {} },
-        widgetSource,
-        widgetPath;
+        sandboxId     = "sandbox$" + seq++,
+        requireConfig = base.util.extend(true, { context: sandboxId, map: {} }, widget.options.require),
+        widgetPath = widgetPath = 'widgets/' + channel;
 
-    if (/\:/.test(file)) {
-      requireConfig.baseUrl = "http://" + file.split(':')[0];
-      widgetPath = 'widgets/' + file.split(':')[1];
-      console.warn('bah alors: ', file, requireConfig.baseUrl);
-
-      requireConfig.paths = {
-        text: 'extensions/backbone/lib/text'
-      };
-
-    } else {
-      widgetPath = 'widgets/' + file;
-    }
-
-    var widgetSandbox = sandbox.create(this);
+    var widgetSandbox = sandbox.create(this, channel);
     widgetSandbox._id = sandboxId;
 
-    requireConfig.map[widgetPath] = {
+    requireConfig.map[channel] = {
       sandbox: sandboxId  
     };
-    
+   
     define(sandboxId, widgetSandbox);
 
-    console.warn("requireConfig", requireConfig);
+
+    // Hack to have requirejs plugins already loaded here...
+
+    define('text', text);
+    define('i18n', i18n);
+
     var req = require.config(requireConfig);
 
-    req([widgetPath + "/main"], function(main) {
+    req([channel], function(main) {
       try {
         dfd.resolve(main(widget.options));
       } catch(e) {

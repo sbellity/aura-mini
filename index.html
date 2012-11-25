@@ -1,16 +1,8 @@
-<html>
-  
+<!doctype html>
+<html lang="en">
+
   <head>
-    <script>
-    // var require = {
-    //   callback: function() {
-    //     require(['aura'], function(aura) {
-    //       aura.start();
-    //     });
-    //   }
-    // };
-    </script>
-    <script data-main="app" src="vendor/require.js"></script>
+    <script data-main="app" src="src/vendor/require.js"></script>
     <link rel="stylesheet" href="http://aura.dev/src/apps/demo/css/todos.css">
   </head>
   
@@ -25,8 +17,8 @@
     <div id="app2">
       <section data-widget="super"></section>
       <section data-widget="base"></section>
-      <section data-widget="aura.dev/src:boilerplate"></section>
-      <section data-widget="aura.dev/src:todos" id="todoapp"></section>
+      <section data-widget="boilerplate@aura.dev/src/widgets"></section>
+      <section data-widget="todos" id="todoapp" data-require='{ "baseUrl" : "http://aura.dev/src" }'></section>
     </div>
     
   </body>

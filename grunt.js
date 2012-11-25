@@ -4,6 +4,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib');
   grunt.loadNpmTasks('grunt-requirejs');
   grunt.loadNpmTasks('grunt-jasmine-task');
+  grunt.loadNpmTasks('grunt-contrib-compress');
 
   // ==========================================================================
   // Project configuration
@@ -18,7 +19,7 @@ module.exports = function(grunt) {
 
     // js linting
     lint: {
-      files: ['lib/aura/**/*.js']
+      files: ['src/aura/**/*.js']
     },
 
     // jasmine testsuites
@@ -33,6 +34,12 @@ module.exports = function(grunt) {
       tasks: ['lint']
     },
 
+    compress: {
+      zip: {
+        'dist/config.js.gz': 'dist/config.js'
+      }
+    },
+
     // SINGLE TASKS
     // ----------------------
 
@@ -44,7 +51,8 @@ module.exports = function(grunt) {
         // application directory
         appDir: 'src',
 
-        mainConfigFile: './config.js',
+        mainConfigFile: './src/config.js',
+
         // base url for retrieving paths
         baseUrl: '.',
         
@@ -96,7 +104,7 @@ module.exports = function(grunt) {
   });
 
   // build task
-  grunt.registerTask('build', 'clean lint jasmine requirejs:std');
+  grunt.registerTask('build', 'clean lint jasmine requirejs:std compress:zip');
 
   // default build task
   grunt.registerTask('default', 'build');
