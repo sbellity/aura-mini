@@ -1,7 +1,17 @@
 <html>
   
   <head>
-    <script data-main="config" src="vendor/require.js"></script>
+    <script>
+    // var require = {
+    //   callback: function() {
+    //     require(['aura'], function(aura) {
+    //       aura.start();
+    //     });
+    //   }
+    // };
+    </script>
+    <script data-main="app" src="vendor/require.js"></script>
+    <link rel="stylesheet" href="http://aura.dev/src/apps/demo/css/todos.css">
   </head>
   
   <body>
@@ -13,9 +23,10 @@
     </div>
     
     <div id="app2">
-      <div data-widget="super"></div>
-      <div data-widget="base"></div>
-      <div data-widget="base"></div>
+      <section data-widget="super"></section>
+      <section data-widget="base"></section>
+      <section data-widget="aura.dev/src:boilerplate"></section>
+      <section data-widget="aura.dev/src:todos" id="todoapp"></section>
     </div>
     
   </body>

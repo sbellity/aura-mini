@@ -1,30 +1,42 @@
-require.config({
-  baseUrl: "/aura-mini/",
-  deps: ['hull'],
-  paths: {
-    // Vendors
-    jquery:     './vendor/jquery',
-    backbone:   './vendor/backbone',
-    underscore: './vendor/underscore',
+define(function() {
+
+  require.config({
     
-    // Hull
+    baseUrl: "/",
 
-    hull:            './lib/hull',
-    hull_base:       './lib/hull/base',
-    hull_core:       './lib/hull/core',
-    hull_sandbox:    './lib/hull/sandbox',
-    hull_widget:     './lib/hull/widget',
+    deps: ['aura'],
+    
+    paths: {
 
-    widgets:          './widgets'
-  },
-  
-  shim: {
-    jquery:     { exports: "$" },
-    backbone:   { exports: "Backbone", deps: [ 'underscore', 'jquery' ] },
-  },
+      // require plugins
+      text:               './vendor/require/text',
 
-  callback: function() {
-    window.Hull = require('hull');
-    Hull.start();
-  }
+      // Vendors
+      jquery:             './vendor/jquery',
+      backbone:           './vendor/backbone',
+      underscore:         './vendor/underscore',
+      eventemitter:       './vendor/eventemitter2',
+      widgets:            './widgets'
+    },
+
+    config: {
+      'aura/core': {
+        extensions: ['aura/core/pubsub', 'aura/core/widgets']
+      },
+      'aura/sandbox': {
+        extensions: ['mvc', 'pubsub', 'store']
+      }
+    },
+
+    packages: [
+      { name: 'aura', location: './lib/aura' }
+    ],
+    
+    shim: {
+      jquery:     { exports: "$" },
+      backbone:   { exports: "Backbone", deps: [ 'underscore', 'jquery' ] },
+      underscore: { exports: "_" }
+    }
+  });
+
 });

@@ -1,3 +1,5 @@
-require(['hull_core'], function(core) {
-  // core.start();
+require(['config'], function(config) {
+  require(['aura'], function(aura) {
+    aura.start();
+  });
 });

@@ -18,7 +18,7 @@ module.exports = function(grunt) {
 
     // js linting
     lint: {
-      files: ['src/aura/*.js', 'src/apps/**/*.js', 'src/widgets/**/*.js', 'src/extensions/*/*.js']
+      files: ['lib/aura/**/*.js']
     },
 
     // jasmine testsuites
@@ -30,7 +30,7 @@ module.exports = function(grunt) {
     // to be watched for changes
     watch: {
       files: ['<config:lint.files>'],
-      tasks: ['lint', 'jasmine']
+      tasks: ['lint']
     },
 
     // SINGLE TASKS
@@ -44,7 +44,7 @@ module.exports = function(grunt) {
         // application directory
         appDir: 'src',
 
-        mainConfigFile: 'src/config.js',
+        mainConfigFile: './config.js',
         // base url for retrieving paths
         baseUrl: '.',
         
@@ -89,7 +89,7 @@ module.exports = function(grunt) {
     },
 
     server: {
-      port: 8888,
+      port: 8889,
       base: './'
     }
 
