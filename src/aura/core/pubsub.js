@@ -6,17 +6,17 @@ define(['module', 'eventemitter'], function(module, EventEmitter) {
 
   function createPubsub(subscriber) {
     return new EventEmitter(emitterConfig);
-  };
+  }
   
   function getPubsub(subscriber) {
     return pubsubs[subscriber] = pubsubs[subscriber] || createPubsub(subscriber);
-  };
+  }
 
 
   function getPermissions(subscriber) {
     getPubsub(subscriber);
     return permissions.rules(subscriber);
-  };
+  }
 
   function hasPermission(subscriber, event) {
     var eventPerm, pubsub = getPubsub(subscriber);
@@ -26,7 +26,7 @@ define(['module', 'eventemitter'], function(module, EventEmitter) {
                                 // giving aura permissions * and ** support.
 
     return (pubsub.listeners(eventPerm).length > 0) ? true : false;
-  };
+  }
 
 
   return {

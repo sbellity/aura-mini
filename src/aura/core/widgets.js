@@ -42,7 +42,7 @@ define(['../base', '../sandbox', 'text', 'i18n'], function(base, sandbox, text, 
         dfd           = base.data.deferred(),
         sandboxId     = "sandbox$" + seq++,
         requireConfig = base.util.extend(true, { context: sandboxId, map: {} }, widget.options.require),
-        widgetPath = widgetPath = 'widgets/' + channel;
+        widgetPath    = 'widgets/' + channel;
 
     var widgetSandbox = sandbox.create(this, channel);
     widgetSandbox._id = sandboxId;
@@ -53,8 +53,7 @@ define(['../base', '../sandbox', 'text', 'i18n'], function(base, sandbox, text, 
    
     define(sandboxId, widgetSandbox);
 
-
-    // Hack to have requirejs plugins already loaded here...
+    // Hack to have requirejs plugins already loaded here... ?
 
     define('text', text);
     define('i18n', i18n);
