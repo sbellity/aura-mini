@@ -1,0 +1,16 @@
+{
+  "name": "aura",
+  "version": "0.9.0",
+  "main": "./lib/aura/main.js",
+  "dependencies": {
+    "jquery": "*",
+    "underscore": "*",
+    "eventemitter2": "*",
+    "requirejs": "~2.0",
+    "requirejs-text" : "*",
+    "requirejs-i18n" : "*",
+    "require-handlebars-plugin": "*",
+    "backbone": "*",
+    "backbone.localStorage" : "*"
+  }
+}

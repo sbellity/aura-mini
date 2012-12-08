@@ -10,8 +10,8 @@ define([
     create: function(core, channel) {
 
       var sandbox = { channel: channel };
-      
-      // Expose base core API
+
+      // Expose 'public' core API
       core.util.each(['log', 'template', 'util', 'data', 'dom'], function(i,m) {
         sandbox[m] = core[m];
       });
@@ -26,8 +26,10 @@ define([
       });
 
       sandbox.start = function(el) {
-        core.start(el);
+        core.start.call(sandbox, el);
       };
+
+      sandbox.start.sandboxes = core.start.sandboxes;
 
       return sandbox;
     }

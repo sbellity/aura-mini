@@ -7,7 +7,7 @@ define(function() {
       };
 
       sandbox.emit = function() {
-        console.warn("Emit event: ", arguments);
+        core.emit.apply(sandbox, arguments);
       };
       
       return sandbox;

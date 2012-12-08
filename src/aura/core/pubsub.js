@@ -64,6 +64,9 @@ define(['module', 'eventemitter'], function(module, EventEmitter) {
         }
       };
 
+      var isWidgetLoading = false;
+      var emitQueue = [];
+
       core.emit = function(event) {
         if (event === undefined) {
           throw new Error('Channel must be defined');

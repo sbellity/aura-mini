@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <script data-main="app" src="../components/requirejs/require.js"></script>
+    <link rel="stylesheet" href="http://aura.dev/src/apps/demo/css/todos.css">
+  </head>
+  
+  <body>
+    
+    <div id="app1">
+      <section data-widget="super"></section>
+      <section data-widget="base"></section>      
+    </div>
+    <div id="app2">
+      <section data-widget="nested"></section>
+      <section data-widget="boilerplate@aura.dev/src/widgets"></section>
+      <!-- <section data-widget="todos" id="todoapp" data-require='{ "baseUrl" : "http://aura.dev/src" }'></section> -->
+      <section data-widget="todos@aura.dev/src/widgets" id="todoapp"></section>
+    </div>
+    <div id="issues">
+      <section data-widget="github_issues"></section>
+    </div>
+    
+  </body>
+  
+</html>

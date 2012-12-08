@@ -1,19 +1,45 @@
-define(function() {
+define(['core'], function(core) {
 
-  var WidgetBase = {
-    initialize: function() {
-      console.warn("Base Widget init with options: ", arguments);
-    },
-    render: function() {
-      this.dom.find(this.el).html('A Super Widget !');
-    }
+  // Widgets registry...
+
+  function Widget(options) {
+    this.options = options;
+    this.initialize.apply(this, this.options);
+  }
+
+  Widget.registry = {};
+
+  Widget.load = function(widgetName, options) {
+    Widget.registry[widgetName] = Widget.registry[widgetName] || new Widget(name, options);
   };
 
-  var Widget = {};
+  var proto = Widget.prototype = {};
+
+  proto.getPath = function() {
+    
+  };
+
+  proto.initialize = function() {
+      
+  };
+
+  // Widget Loading
+
+
+  proto.load = function() {
+    if (this._loading) { return this._loading; }
+    this._loading = core.data.deferred();
+    require([], function(ref) {
+      this._loading.resolve();
+    }.bind(this), function() {
+      this._loading.reject();
+    }.bind(this));
+
+    return this._loading;    
+  };
   
-  Widget.create = function(sandbox, options) {
-    var Widget = sandbox.mvc.View(WidgetBase).extend(sandbox);
-    return new Widget(options);
+  proto.unload = function() {
+    
   };
 
   return Widget;

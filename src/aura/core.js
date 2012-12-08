@@ -1,7 +1,7 @@
 define([
   './base', 
-  './core/widgets', 
-  './core/pubsub'
+  './core/pubsub',
+  './core/widgets'
 ], function(base) {
 
   var core = Object.create(base);
@@ -13,5 +13,4 @@ define([
   });
 
   return core;
-
 });
