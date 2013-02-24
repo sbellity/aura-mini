@@ -8,7 +8,7 @@
     "grunt-contrib": "~0.3.0",
     "grunt-jasmine-task": "~0.2.2",
     "grunt-dox": "*",
-    "grunt-growl": "*",
+    "grunt-growl": "latest",
     "grunt-contrib-compress" : "*"
   }
 }
